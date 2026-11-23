@@ -1,0 +1,9 @@
+.git
+artifacts
+data/raw
+audit
+train.log
+__pycache__
+*.pyc
+.claude
+data/real/pune_rents_clean.csv

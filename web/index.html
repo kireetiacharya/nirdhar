@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nirdhar · Property Valuation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>Nirdhar</b><span>AI-powered digital property valuation · Pune first · Hyderabad next</span></div>
+  <nav class="tabs">
+    <button data-tab="value" class="on">Valuation</button>
+    <button data-tab="model">Model &amp; validation</button>
+    <button data-tab="api">API</button>
+  </nav>
+</header>
+<div class="banner"><b>Prototype.</b> Pune uses <b>real</b> OpenStreetMap locations, metro stations, amenities and river proximity, plus real Makaan rents.
+  Transactions are still synthetic (structured like Index-II) until the e-Search sample arrives, so values and grades illustrate the method, not real valuations.</div>
+
+<main>
+  <!-- ======================= VALUATION ======================= -->
+  <section id="tab-value">
+    <div class="layout">
+      <form class="card form" id="form" autocomplete="off">
+        <h3>Demo scenarios</h3>
+        <div class="presets" id="presets"></div>
+        <h3>Property</h3>
+        <div class="row2">
+          <div class="field"><label>City</label><select id="city"></select></div>
+          <div class="field"><label>Micro-market</label><select id="micro_market"></select></div>
+        </div>
+        <div class="field"><label>RERA project</label><select id="project_id"></select>
+          <span class="hint" id="proj-hint"></span></div>
+        <div class="row2">
+          <div class="field"><label>Property type</label>
+            <select id="property_type">
+              <option value="apartment">Apartment</option><option value="builder_floor">Builder floor</option>
+              <option value="independent_house">Independent house</option><option value="plot">Plot</option>
+              <option value="commercial">Commercial</option></select></div>
+          <div class="field hidden" id="kind-field"><label>Commercial type</label><select id="commercial_kind"><option value="shop">Shop</option><option value="office">Office</option></select></div>
+          <div class="field"><label>BHK</label><select id="bhk"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Area (sq ft)</label><input id="carpet_area" type="number" value="1050" min="200" step="1"></div>
+          <div class="field"><label>Area basis</label><select id="area_basis"><option value="carpet">Carpet</option>
+            <option value="builtup">Built-up</option><option value="superbuiltup">Super built-up</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Floor</label><input id="floor" type="number" value="5" min="0"></div>
+          <div class="field"><label>Total floors</label><input id="total_floors" type="number" placeholder="from RERA"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label>Age (years)</label><input id="age_years" type="number" step="0.5" placeholder="from RERA"></div>
+          <div class="field"><label>Facing</label><select id="facing"><option value="">—</option><option>East</option><option>North</option><option>West</option><option>South</option></select></div>
+        </div>
+        <div class="field"><label>Covered parking</label>
+          <div class="seg" id="parking"><button type="button" data-v="true">Yes</button><button type="button" data-v="false">No</button><button type="button" data-v="" class="on">Not stated</button></div></div>
+        <div class="divider">Loan application (optional, ₹ lakh)</div>
+        <div class="row2">
+          <div class="field"><label>Agreement value</label><input id="agreement_value" type="number" step="0.1" placeholder="e.g. 94"></div>
+          <div class="field"><label>Loan amount</label><input id="loan_amount" type="number" step="0.1" placeholder="e.g. 60"></div>
+        </div>
+        <div class="field"><label>Asking price</label><input id="asking_price" type="number" step="0.1" placeholder="leave blank to use project listings"></div>
+        <button class="btn" id="go" type="submit">Value property</button>
+        <div id="form-err" class="err hidden"></div>
+      </form>
+
+      <div id="results">
+        <div class="card empty" id="empty">
+          <h2>Value a flat the way an expert valuer does</h2>
+          <p>Pick a demo scenario or enter a property. Nirdhar returns a deed-calibrated value, a calibrated 90% range,
+            the comparables it used, the reasons in rupees, and the lending route.</p>
+          <div class="steps">
+            <div><b>1 · Three prices reconciled</b>Asking, registered and guidance values modelled per micro-market.</div>
+            <div><b>2 · Three models, stacked</b>Gradient boosting, comparable-sales attention and a hierarchical hedonic model.</div>
+            <div><b>3 · Confidence decides the route</b>Spatial conformal range → grade A–D → desktop, light-touch or field visit.</div>
+          </div>
+        </div>
+        <div id="out" class="stack hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MODEL ======================= -->
+  <section id="tab-model" class="hidden"><div id="model-out" class="stack"></div></section>
+
+  <!-- ======================= API ======================= -->
+  <section id="tab-api" class="hidden">
+    <div class="card">
+      <h3>Valuation API</h3>
+      <p class="sub">Five fields are enough: micro-market, project, BHK, area and floor. Everything else is looked up from the precomputed feature store.</p>
+      <pre class="mono" style="background:var(--bg);padding:14px;border-radius:8px;overflow:auto">POST /api/valuations
+{
+  "city": "Pune", "micro_market": "Yerawada", "project_id": "PUN-0123",
+  "bhk": 2, "carpet_area": 850, "floor": 7,
+  "agreement_value": 8200000, "loan_amount": 6000000        // optional
+}
+
+POST /api/valuations   (commercial: income approach)
+{ "city": "Pune", "micro_market": "Kothrud", "property_type": "commercial",
+  "commercial_kind": "shop", "bhk": 1, "carpet_area": 420, "floor": 0
+}
+
+→ value_inr, p05_inr, p95_inr, grade, drivers (₹), comparables (attention weights),
+  reconciliation, project_intel, flags, route, data_quality, model_version, data_snapshot_hash
+
+GET  /api/valuations/{id}            stored valuation (audit store)
+POST /api/valuations/{id}/replay     re-run with the same inputs and verify an exact match
+GET  /api/model                      model card: metrics, ablation ladder, pipeline report
+GET  /docs                           interactive OpenAPI docs</pre>
+      <a class="btn ghost" href="/docs" target="_blank">Open interactive API docs</a>
+    </div>
+  </section>
+</main>
+<footer style="text-align:center;padding:0 24px 32px;font-size:12px;color:var(--muted);">
+  Map and location data © <a href="https://www.openstreetmap.org/copyright" target="_blank" style="color:inherit;">OpenStreetMap contributors</a> (ODbL).
+  Rent levels aggregated from public Makaan listings. Prices are synthetic in this prototype.
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/common.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

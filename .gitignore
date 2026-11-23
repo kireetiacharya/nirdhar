@@ -1,0 +1,11 @@
+# built at deploy time
+artifacts/
+data/raw/
+audit/
+train.log
+__pycache__/
+*.pyc
+.claude/
+# raw third-party rent listings: licence unclear, so only the aggregated per-cell medians
+# (data/real/pune_osm_cells.csv) are published
+data/real/pune_rents_clean.csv

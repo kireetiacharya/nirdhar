@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nirdhar Valuation Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+  <style>
+    body { background: #e9edf2; }
+    .page { max-width: 920px; margin: 24px auto; background: #fff; box-shadow: 0 2px 14px rgba(0,0,0,.08); }
+    .rh { background: var(--navy); color: #fff; padding: 20px 28px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+    .rh .t { font-size: 11px; letter-spacing: .14em; color: #f3b4bf; font-weight: 700; }
+    .rh h1 { margin: 4px 0 0; font-size: 20px; }
+    .rh .meta { text-align: right; font-size: 11.5px; color: #c9d4e3; }
+    .sec { padding: 16px 28px; border-bottom: 1px solid var(--line); }
+    .sec h3 { margin: 0 0 10px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .disc { font-size: 11px; color: var(--muted); padding: 14px 28px 20px; }
+    .toolbar { max-width: 920px; margin: 16px auto 0; display: flex; justify-content: flex-end; gap: 8px; }
+    @media print {
+      body { background: #fff; } .toolbar { display: none; } .page { box-shadow: none; margin: 0; max-width: none; }
+      .sec { break-inside: avoid; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @media (max-width: 700px) { .two { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="toolbar"><button class="btn ghost" onclick="window.print()">Download PDF / Print</button></div>
+<div class="page" id="page"><div class="sec">Loading…</div></div>
+<script src="/static/common.js"></script>
+<script>
+(async function () {
+  const id = new URLSearchParams(location.search).get("id");
+  const r = await (await fetch(`/api/valuations/${encodeURIComponent(id)}`)).json();
+  const pg = document.getElementById("page");
+  if (!r.supported) { pg.innerHTML = `<div class="sec"><h3>Out of scope</h3><p>${esc(r.route?.reason || "")}</p></div>`; return; }
+  if (r.mode === "commercial_income") {
+    const v = r.valuation, p = r.property, rt = r.route, c = r.commercial;
+    pg.innerHTML = `<div class="rh"><div><div class="t">NIRDHAR VALUATION REPORT · COMMERCIAL</div>
+      <h1>${esc(p.kind)} · ${num(p.carpet_area)} sq ft carpet · floor ${p.floor} · ${esc(p.micro_market)}, ${esc(p.city)}</h1></div>
+      <div class="meta">Report ${esc(r.valuation_id.slice(0, 8))}<br>${esc(r.requested_at.replace("T", " "))}</div></div>` +
+      (v ? `<div class="sec two"><div><div class="eyebrow">Estimated value (income approach)</div><div class="bigval num">${inr(v.value_inr)}</div>
+        <div>Range <b>${inr(v.p05_inr)} – ${inr(v.p95_inr)}</b></div>
+        <div class="grade"><div class="g g${v.grade}">${v.grade}</div><div><b>${v.grade_label}</b><div class="sub">${esc(rt.route)}</div></div></div></div>
+        <div><h3>How the value is built</h3><table class="kv">${c.steps.map(s => `<tr><td>${esc(s.step)}<span class="s">${esc(s.source)}</span></td><td>${esc(s.value)}</td></tr>`).join("")}</table></div></div>` : "") +
+      `<div class="sec two"><div><h3>Flags</h3>${flagsHtml(r.flags)}</div><div><h3>Lending decision</h3>
+        <div class="route ${rt.code}"><b>${esc(rt.route)}</b>${esc(rt.reason)}</div></div></div>
+      <div class="disc"><b>Disclaimer.</b> Income-approach multipliers and yields are stated assumptions, not yet calibrated on
+        commercial lease or sale records. Rent evidence: real Makaan listings; location evidence: OpenStreetMap (ODbL).</div>`;
+    return;
+  }
+  const v = r.valuation, p = r.property, rt = r.route, dq = r.data_quality;
+  pg.innerHTML = `
+  <div class="rh"><div><div class="t">NIRDHAR VALUATION REPORT</div>
+    <h1>${p.bhk} BHK · ${num(p.carpet_area)} sq ft carpet · ${p.project_name ? esc(p.project_name) + ", " : ""}${esc(p.micro_market)}, ${esc(p.city)}</h1></div>
+    <div class="meta">Report ${esc(r.valuation_id.slice(0, 8))}<br>${esc(r.requested_at.replace("T", " "))}<br>Valuation as of ${esc(r.model.as_of)}</div></div>
+
+  <div class="sec two">
+    <div><div class="eyebrow">Estimated value</div><div class="bigval num">${inr(v.value_inr)}</div>
+      <div>90% range <b>${inr(v.p05_inr)} – ${inr(v.p95_inr)}</b> · ₹${num(v.ppsf)}/sq ft carpet</div>
+      <div class="grade"><div class="g g${v.grade}">${v.grade}</div><div><b>${v.grade_label}</b><div class="sub">${esc(rt.route)}</div></div></div></div>
+    <div><h3>Property details</h3><table class="kv">
+      <tr><td>Location</td><td>${esc(p.micro_market)}, ${esc(p.city)} (${p.lat}, ${p.lon})</td></tr>
+      <tr><td>RERA project</td><td>${r.project_intel.linked ? esc(r.project_intel.name) + " · " + esc(r.project_intel.rera_id || "pre-RERA") : "Not linked"}</td></tr>
+      <tr><td>Configuration</td><td>${p.bhk} BHK · floor ${p.floor} of ${p.total_floors}</td></tr>
+      <tr><td>Carpet area</td><td>${num(p.carpet_area)} sq ft${p.area_basis !== "carpet" ? ` (from ${num(p.area_input)} ${p.area_basis})` : ""}</td></tr>
+      <tr><td>Age / status</td><td>${p.under_construction ? "Under construction" : p.age_years + " years"}</td></tr>
+      <tr><td>Parking · facing</td><td>${p.parking === true ? "Covered" : p.parking === false ? "None" : "Not stated"} · ${esc(p.facing || "—")}</td></tr>
+    </table></div>
+  </div>
+
+  <div class="sec two">
+    <div><h3>Price reconciliation</h3><table class="kv">${r.reconciliation.items.map(i => `<tr><td>${esc(i.label)}<span class="s">${esc(i.source)}</span></td><td>${inr(i.inr)}${i.status ? (i.status === "ok" ? " ✓" : " ● " + i.status) : ""}</td></tr>`).join("")}</table>
+      <ul class="notes">${r.reconciliation.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>
+    <div><h3>Why this value</h3>${driversHtml(r.drivers)}</div>
+  </div>
+
+  <div class="sec"><h3>Top comparable sales (time-adjusted)</h3>${compsTable(r.comparables.items, 6)}</div>
+
+  <div class="sec two">
+    <div><h3>Risk flags</h3>${flagsHtml(r.flags)}</div>
+    <div><h3>Lending decision</h3>
+      <div class="route ${rt.code}"><b>${esc(rt.route)}</b>${esc(rt.reason)}</div>
+      <table class="kv"><tr><td>LTV base (${esc(rt.ltv_base_label)})</td><td>${inr(rt.ltv_base_inr)}</td></tr>
+      <tr><td>Maximum eligible loan</td><td>${inr(rt.max_eligible_loan_inr)}</td></tr></table></div>
+  </div>
+
+  <div class="sec two">
+    <div><h3>Confidence</h3>${modelsHtml(r.disagreement, v)}
+      <table class="kv" style="margin-top:8px"><tr><td>Sales within 1 km · effective comps</td><td>${dq.comps_within_1km} · ${dq.comps_effective_n}</td></tr>
+      <tr><td>Calibration deeds nearby (effective)</td><td>${dq.calibration_effective_n}</td></tr>
+      <tr><td>Out-of-distribution score</td><td>${dq.ood_score}</td></tr></table></div>
+    <div><h3>Model and data</h3><table class="kv">
+      <tr><td>Model version</td><td class="mono">${esc(r.model.model_version)}</td></tr>
+      <tr><td>Data snapshot hash</td><td class="mono">${esc(r.model.data_snapshot_hash)}</td></tr>
+      <tr><td>Trained</td><td>${esc(r.model.trained_at)}</td></tr>
+      <tr><td>Valuation id</td><td class="mono" style="font-size:10px">${esc(r.valuation_id)}</td></tr>
+      <tr><td>Method</td><td style="font-weight:400;font-size:12px">GBM + comps attention + hierarchical hedonic, stacked; spatial conformal 90% range; grouped Shapley drivers</td></tr>
+    </table></div>
+  </div>
+  <div class="disc"><b>Disclaimer.</b> ${esc(r.synthetic_note)} An automated valuation supports, and does not replace, the
+    empanelled valuer's sign-off required under the lender's Board-approved valuation policy. Inputs, model version and data
+    snapshot are stored; this valuation can be replayed exactly.</div>`;
+})();
+</script>
+</body>
+</html>

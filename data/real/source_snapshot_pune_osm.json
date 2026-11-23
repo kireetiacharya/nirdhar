@@ -1,0 +1,12 @@
+{
+  "snapshot_id": "geofabrik_western_zone_2026-11-21",
+  "source_name": "Geofabrik OSM western-zone (gpkg)",
+  "licence": "ODbL 1.0 - (c) OpenStreetMap contributors",
+  "method": "download",
+  "osm_data_as_of": "2026-11-21T21:20:51Z",
+  "accessed_at": "2026-11-22",
+  "derived_files": [
+    "pune_osm_cells.csv",
+    "osm_pune_metro_stations.csv (Overpass API, same licence)"
+  ]
+}

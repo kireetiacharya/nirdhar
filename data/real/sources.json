@@ -1,0 +1,31 @@
+{
+  "built_at": "2026-11-22T17:19:21",
+  "layers": {
+    "poi_counts, bus_stops, osm stations, places, rivers": {
+      "source": "Geofabrik india/western-zone-latest-free (OpenStreetMap)",
+      "osm_as_of": "2026-11-21T21:20:51Z",
+      "licence": "ODbL 1.0, (c) OpenStreetMap contributors",
+      "origin": "real"
+    },
+    "metro stations": {
+      "source": "OpenStreetMap via Overpass API, 2026-11-22",
+      "licence": "ODbL 1.0",
+      "origin": "real",
+      "caveat": "operational/upcoming stage assigned by STAGE RULE; verify"
+    },
+    "flood_proxy": {
+      "source": "distance to OSM rivers (Mula, Mutha, Pavana, Indrayani...)",
+      "origin": "real-derived",
+      "caveat": "proxy, not an official hazard map"
+    },
+    "rent_psf_month_1500m": {
+      "source": "Kaggle 'Indian Rental House Price' (Makaan listings), file Indian_housing_Pune_data.csv",
+      "origin": "real (asking rents)",
+      "caveat": "licence unclear; listing dates relative ('Posted N years ago')"
+    },
+    "locality priors": {
+      "origin": "synthetic",
+      "note": "generator prior only; never shown as data"
+    }
+  }
+}

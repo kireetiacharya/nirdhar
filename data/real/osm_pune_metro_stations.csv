@@ -1,0 +1,94 @@
+base_name,lat,lon,network,construction,osm_ids,stage
+Agriculture College,18.533006,73.8414867,Pune Metro Pink Line,,7944597695,osm_no_construction_tag
+Akurdi,18.65116,73.7847467,Pune Metro,yes,13647412354,osm_tagged_under_construction
+Anandnagar,18.5095724,73.8140749,Pune Metro,,9599243854,osm_no_construction_tag
+Aundh,18.5503056,73.8082572,Pune Metro Pink Line,,13647113364,osm_no_construction_tag
+Bakori Phata,18.5902162,73.9978013,Pune Metro,,13650652440,osm_no_construction_tag
+Balaji Nagar,18.4532267,73.8583793,Pune Metro,,13659087397,osm_no_construction_tag
+Balewadi High Street,18.570512,73.7748382,Pune Metro Pink Line,yes,13647113368,osm_tagged_under_construction
+Balewadi Phata,18.5641859,73.7797665,Pune Metro Pink Line,yes,13647113367,osm_tagged_under_construction
+Baner Gaon,18.5591961,73.7905982,Pune Metro Pink Line,yes,13647113366,osm_tagged_under_construction
+Baner Pashan Link Road,18.5549554,73.7976669,Pune Metro Pink Line,yes,13647113365,osm_tagged_under_construction
+Bhakti Shakti,18.6625606,73.7745745,Pune Metro,yes,13647412351,osm_tagged_under_construction
+Bhosalenagar RBI,18.5363707,73.8366919,Pune Metro Pink Line,station,7944597700,osm_tagged_under_construction
+Bibwewadi,18.4752329,73.8562486,Pune Metro,,13659087365,osm_no_construction_tag
+Bopodi,18.5696611,73.8381029,Pune Metro,,7944597711,osm_no_construction_tag
+Bund Garden,18.5405933,73.8834394,Pune Metro,,11699340649,osm_no_construction_tag
+Chandani Chowk,18.5076364,73.7866978,Pune Metro,,13654973659,osm_no_construction_tag
+Chhatrapati Sambhaji Udyan,18.5200806,73.847383,Pune Metro,,11097527718,osm_no_construction_tag
+Chinchwad,18.6391732,73.7949314,Pune Metro,yes,13647412355,osm_tagged_under_construction
+Dahanukar Colony,18.4959875,73.8134796,Pune Metro,,13652090836,osm_no_construction_tag
+Dalvewadi,18.4549986,73.797143,Pune Metro,,13654853657,osm_no_construction_tag
+Dandekar Pul,18.5008404,73.8451802,Pune Metro,,13654857891,osm_no_construction_tag
+Dapodi,18.5826061,73.8332256,Pune Metro,,2432308147;7944584975,osm_no_construction_tag
+Daulat Nagar,18.4726158,73.8113846,Pune Metro,,13652090927,osm_no_construction_tag
+Deccan Gymkhana,18.5164485,73.8444458,Pune Metro,,11097527725,osm_no_construction_tag
+Deshpande Udyan,18.494875,73.8370477,Pune Metro,,13654857874,osm_no_construction_tag
+Dhayari Phata,18.4589198,73.8093956,Pune Metro,,13654853683,osm_no_construction_tag
+District Court,18.527300366666665,73.85688623333333,Pune Metro,,7944597685;11097510274;13570390374,osm_no_construction_tag
+Fatima Nagar,18.506547,73.9005261,Pune Metro,,13661267070,osm_no_construction_tag
+Garware College,18.5119886,73.8380505,Pune Metro,,9599243857,osm_no_construction_tag
+Hadapsar,18.5036702,73.9227746,Pune Metro,,13661267088,osm_no_construction_tag
+Hingane Chowk,18.4810557,73.8258017,Pune Metro,,13654857836,osm_no_construction_tag
+Hinjawadi Phase 1,18.5909665,73.7463002,Pune Metro Pink Line,,13647113373,osm_no_construction_tag
+Hinjawadi Phase 2 Circle 1,18.59659,73.7171607,Pune Metro Pink Line,,7944597696,osm_no_construction_tag
+Hinjawadi Phase 2 Circle 2,18.5941952,73.7092228,Pune Metro Pink Line,,7944584983,osm_no_construction_tag
+Kalyani Nagar,18.5444806,73.9056979,Pune Metro,,11699340655,osm_no_construction_tag
+Karve Nagar,18.4880762,73.8134605,Pune Metro,,13652090882,osm_no_construction_tag
+Karve Putala,18.5026032,73.817815,Pune Metro,,13652090804,osm_no_construction_tag
+Kasarwadi,18.5996201,73.8272644,Pune Metro,,7944597699,osm_no_construction_tag
+Kasba Peth कसबा पेठ,18.5213749,73.8596235,Pune Metro,,12211880200,osm_no_construction_tag
+Katraj,18.4465735,73.8590089,Pune Metro,,13659088612,osm_no_construction_tag
+Khadki,18.5622619,73.8420825,Pune Metro,,13644302877,osm_no_construction_tag
+Kharadi Bypass,18.5623586,73.9378087,Pune Metro,,13650679304,osm_no_construction_tag
+Kothrud,18.5038889,73.807673,Pune Metro,,2194045720,osm_no_construction_tag
+Kothrud Bus Depot,18.5081264,73.7929525,Pune Metro,,7944597709,osm_no_construction_tag
+Maan,18.5792129,73.6880159,Pune Metro Pink Line,,7944584973,osm_no_construction_tag
+Maan Bus Depot,18.5881015,73.7028954,Pune Metro Pink Line,,7944584965,osm_no_construction_tag
+Maan MIDC Circle - Phase 2,18.5840185,73.6948179,Pune Metro Pink Line,,7944597688,osm_no_construction_tag
+Manik Baug,18.4671378,73.817952,Pune Metro,,13652090944,osm_no_construction_tag
+Market Yard,18.4877859,73.8575177,Pune Metro,,13659087340,osm_no_construction_tag
+Mitcon Balewadi,18.5750336,73.7660624,Pune Metro Pink Line,,13647113369,osm_no_construction_tag
+Nal Stop,18.5054876,73.8242845,Pune Metro,,13652090805,osm_no_construction_tag
+Nanded City,18.4571846,73.8028688,Pune Metro,,13654853672,osm_no_construction_tag
+Nashik Phata,18.609303,73.8200965,Pune Metro,,7944597706,osm_no_construction_tag
+Nigdi,18.6583986,73.778398,Pune Metro,yes,13647412352,osm_tagged_under_construction
+PMC Bhavan,18.5227443,73.8533499,Pune Metro,,7944584980,osm_no_construction_tag
+Padmabhushan Chowk,18.5944867,73.7278263,Pune Metro Pink Line,,14334230170,osm_no_construction_tag
+Padmavati,18.4610069,73.8580973,Pune Metro,,13659087385,osm_no_construction_tag
+Paud Phata,18.508885,73.822144,Pune Metro,,9599243855,osm_no_construction_tag
+Phugewadi,18.5911058,73.8311472,Pune Metro,,7944584963,osm_no_construction_tag
+Pimpri Chinchwad Municipal Corporation,18.6293185,73.8032857,Pune Metro,,10214268972,osm_no_construction_tag
+Pune Cantonment Board,18.5027557,73.8783694,Pune Metro,,13661267008,osm_no_construction_tag
+R K Laxman Museum Balewadi,18.5743428,73.7718487,Pune Metro Pink Line,,14334230175,osm_no_construction_tag
+Race Course,18.5064646,73.8893882,Pune Metro,,13661267047,osm_no_construction_tag
+Rajaram Pul,18.4881031,73.8293979,Pune Metro,,13654857857,osm_no_construction_tag
+Ramtekadi,18.5063079,73.9116278,Pune Metro,,13661267081,osm_no_construction_tag
+Ramwadi,18.557028,73.9085628,Pune Metro,,11699340657,osm_no_construction_tag
+Range Hills,18.5502871,73.8458072,Pune Metro,station,7944584969,osm_tagged_under_construction
+Ruby Hall Clinic,18.5327176,73.8777486,Pune Metro,,7944584984,osm_no_construction_tag
+SNDT College,18.5073567,73.8287815,Pune Metro,,9599243856,osm_no_construction_tag
+Sakal Nagar,18.5463251,73.8196654,Pune Metro Pink Line,,13647113363,osm_no_construction_tag
+Sant Tukaram Nagar,18.6145248,73.8157455,Pune Metro,,7944597690,osm_no_construction_tag
+Savitribai Phule Pune University,18.5423466,73.8271729,,,13647113362,osm_no_construction_tag
+Seven Loves Chowk,18.5014581,73.8696161,Pune Metro,,13661246197,osm_no_construction_tag
+Shivaji Nagar,18.532172,73.8496602,Pune Metro,,11097510271,osm_no_construction_tag
+Shivaji Nagar Railway Station,18.5323977,73.8513848,,,13640060834,osm_no_construction_tag
+Shivajinagar,18.5304297,73.8487146,Pune Metro Pink Line,station,7944584959,osm_tagged_under_construction
+Shree Shiv Chhatrapati Shivaji Maharaj Chowk Hinjawadi,18.5923946,73.7373573,Pune Metro Pink Line,,13647113374,osm_no_construction_tag
+Shree Shiv Chhatrapati Sports Complex Mahalunge,18.5797092,73.7615418,Pune Metro Pink Line,,7944584964,osm_no_construction_tag
+Siddharth Nagar,18.5826643,73.9887086,Pune Metro,,13650652498,osm_no_construction_tag
+Somnath Nagar,18.562864,73.9284008,Pune Metro,,13651468960,osm_no_construction_tag
+Swargate,18.4997453,73.8574604,Pune Metro,,7944597710,osm_no_construction_tag
+Swargate North,18.5007043,73.8568717,Pune Metro,,13654857952,osm_no_construction_tag
+Tuljabhavani Nagar,18.5670968,73.946837,Pune Metro,,13650679303,osm_no_construction_tag
+Ubale Nagar,18.5726091,73.9559404,Pune Metro,,13650679302,osm_no_construction_tag
+Upper Kharadi Rd,18.5756576,73.9626406,Pune Metro,,13650679301,osm_no_construction_tag
+Vanaz,18.5071853,73.8051948,Pune Metro,,9599243853,osm_no_construction_tag
+Viman Nagar,18.5614823,73.9203877,Pune Metro,,13651468961,osm_no_construction_tag
+Vitthalwadi,18.598036,74.0045739,Pune Metro,,13650652439,osm_no_construction_tag
+Wagheshwar Temple,18.5806958,73.978999,Pune Metro,,13650652500,osm_no_construction_tag
+Wagholi,18.58061,73.9836486,Pune Metro,,13650652499,osm_no_construction_tag
+Wakad Chowk,18.5902986,73.7575587,Pune Metro Pink Line,,7944597702,osm_no_construction_tag
+Warje,18.4799601,73.8055078,Pune Metro,,13652090903,osm_no_construction_tag
+Yerwada,18.5453027,73.8866211,Pune Metro,,11699340652,osm_no_construction_tag
