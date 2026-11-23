@@ -1,13 +1,3 @@
----
-title: Nirdhar
-emoji: 🏠
-colorFrom: blue
-colorTo: red
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # Nirdhar — AI-powered digital property valuation (prototype)
 
 Hero Housing Fintech Challenge · Problem Statement 1 · Pune (primary market) → Hyderabad → India.
@@ -29,6 +19,15 @@ python -m uvicorn app:app --port 8000   # 3. open http://localhost:8000
 ```
 
 `run.ps1` does all three. The trained engine is already in `artifacts/`, so step 3 alone is enough for a demo.
+
+## Deploy (free)
+
+**Render** (no Docker, no card): push this repo to GitHub, then on render.com choose **New → Blueprint**
+and pick the repo; `render.yaml` sets the build (install, generate, train ≈ 1–2 min) and start commands
+on the free plan. Measured memory: about 200 MB serving, about 435 MB peak while training (free plan: 512 MB).
+The free service sleeps after 15 minutes idle and wakes in about a minute; saved audit records reset on restart.
+
+The `Dockerfile` does the same for any container host.
 
 ## Demo script (3 minutes)
 

@@ -1,0 +1,11 @@
+# Render Blueprint: New -> Blueprint -> pick this repo. Free web service, no Docker needed.
+services:
+  - type: web
+    name: nirdhar
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m nirdhar.generate && python -W ignore -m nirdhar.train
+    startCommand: python -W ignore -m uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
