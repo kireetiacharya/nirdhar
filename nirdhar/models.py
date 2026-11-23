@@ -67,25 +67,30 @@ class M1:
         self.params = params or {}
 
     def fit(self, df, y, w=None, rf=False):
+        """LightGBM native API (no scikit-learn dependency)."""
         mono = [MONO.get(f, 0) for f in self.feats]
         if rf:
-            prm = dict(boosting_type="rf", n_estimators=300, num_leaves=127, bagging_freq=1, bagging_fraction=0.632,
-                       feature_fraction=0.6, min_child_samples=5, verbose=-1)
+            rounds = 300
+            prm = dict(boosting="rf", num_leaves=127, bagging_freq=1, bagging_fraction=0.632,
+                       feature_fraction=0.6, min_data_in_leaf=5)
         else:
-            prm = dict(n_estimators=900, learning_rate=0.03, num_leaves=31, min_child_samples=20,
-                       feature_fraction=0.8, bagging_fraction=0.8, bagging_freq=1, lambda_l2=1.0,
-                       monotone_constraints=mono, monotone_constraints_method="advanced", verbose=-1)
+            rounds = 900
+            prm = dict(learning_rate=0.03, num_leaves=31, min_data_in_leaf=20, feature_fraction=0.8,
+                       bagging_fraction=0.8, bagging_freq=1, lambda_l2=1.0,
+                       monotone_constraints=mono, monotone_constraints_method="advanced")
+        prm.update(objective="regression", verbose=-1, seed=0, deterministic=True, force_row_wise=True, num_threads=1)
         prm.update(self.params)
         cat = ["loc_code"] if "loc_code" in self.feats else "auto"
-        self.model = lgb.LGBMRegressor(**prm)
-        self.model.fit(df[self.feats], y, sample_weight=w, categorical_feature=cat)
+        ds = lgb.Dataset(df[self.feats], label=np.asarray(y, float), weight=w, categorical_feature=cat,
+                         free_raw_data=False)
+        self.model = lgb.train(prm, ds, num_boost_round=rounds)
         return self
 
     def predict(self, df):
         return self.model.predict(df[self.feats])
 
     def contrib(self, df):
-        return self.model.booster_.predict(df[self.feats], pred_contrib=True)
+        return self.model.predict(df[self.feats], pred_contrib=True)
 
 
 # ====================================================================== M3
